@@ -1,0 +1,19 @@
+{
+  "name": "skuska",
+  "version": "1.0.0",
+  "description": "skuska programu",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikiklimko/bc.git"
+  },
+  "author": "miki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikiklimko/bc/issues"
+  },
+  "homepage": "https://github.com/mikiklimko/bc#readme"
+}
