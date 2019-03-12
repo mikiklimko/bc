@@ -1,6 +1,6 @@
 var scene, camera, renderer;
 
-var gui, cube, xro, yro, zro;
+var gui, cube, sphere, xro, yro, zro;
 
 init();
 animate();
@@ -16,21 +16,25 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    /* var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({
         color: 0xff0000,
         wireframe: true
     });
-    cube = new THREE.Mesh(geometry, material); */
-    
+    cube = new THREE.Mesh(geometry, material); 
+    scene.add(cube);
 
     var geometry2 = new THREE.SphereGeometry( 5, 32, 32 );
-    var material2 = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-    var sphere = new THREE.Mesh( geometry2, material2 );
+    var material2 = new THREE.MeshBasicMaterial( {
+        color: 0xffff00,
+        wireframe:true
+    } );
+    sphere = new THREE.Mesh( geometry2, material2 );
     scene.add(sphere);
 
 
-
+    sphere.position.z = -10;
+    sphere.visible = false; 
     camera.position.x = 2;
     camera.position.y = 1, 2;
     camera.position.z = 4;
@@ -66,8 +70,7 @@ function dispalygui() {
         h: 1, i: 1, j: 1,
         k: 1, l: 1, m: 1,
         x: false, y: false, z: false,
-        n: "",
-        o: "",
+        
 
         
 
@@ -76,9 +79,16 @@ function dispalygui() {
     
     gui.add(parameters, 'a').name('Name');
     var typ = gui.add(parameters, 'b', ["Cube", "Sphere", "Prism"]).name('Geometry');
-    typ.onChange(function (jar) { 
-        
-        console.log(jar)
+    typ.onChange(function (geom) { 
+        if (geom === "Cube"){
+            cube.visible = true;
+            sphere.visible = false;
+        } 
+        if (geom === "Sphere"){
+            cube.visible = false;
+            sphere.visible = true;
+        } 
+        console.log(geom)
         
      });
 
@@ -136,12 +146,6 @@ function dispalygui() {
     xanim.onChange(function (jar) { xro = jar; });
     yanim.onChange(function (jar) { yro = jar; });
     zanim.onChange(function (jar) { zro = jar; });
-
-
-
-
-    gui.add(parameters, 'n', [1, 2, 3, 4, 5]).name('Layer');
-    gui.add(parameters, 'o', ["Save", "Load", "Reset"]).name('Option');
 
 
     //gui.close();
